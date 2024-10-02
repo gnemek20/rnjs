@@ -12,7 +12,7 @@ const Icon = (
   { className?: string, onClick?: Function, children: ReactNode }
 ) => {
   return (
-    <div className={`${styles.icon} ${className?? className}`} onClick={() => onClick && onClick()}>
+    <div className={`${styles.icon} ${className ? className : ''}`} onClick={() => onClick && onClick()}>
       { children }
     </div>
   );
@@ -63,8 +63,7 @@ const taskbar = () => {
       <div className={`${styles.container}`}>
         <div>
           <Icon onClick={reload}>
-            <p>T</p>
-            {/* <Image src={peroroIcon.src} alt={peroroIcon.alt} priority /> */}
+            <Image src={peroroIcon.src} alt={peroroIcon.alt} priority />
           </Icon>
         </div>
         <div>
