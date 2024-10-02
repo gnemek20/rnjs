@@ -34,7 +34,7 @@ const taskbar = () => {
     }
 
     setDate([
-      `${hours}:${zeroFill(month)}:${zeroFill(seconds)}`,
+      `${hours}:${zeroFill(minutes)}:${zeroFill(seconds)}`,
       `${year}-${zeroFill(month)}-${zeroFill(day)}`
     ].join('\n'));
   }
