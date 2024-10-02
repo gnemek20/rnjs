@@ -63,7 +63,8 @@ const taskbar = () => {
       <div className={`${styles.container}`}>
         <div>
           <Icon onClick={reload}>
-            <Image src={peroroIcon.src} alt={peroroIcon.alt} priority />
+            <p>T</p>
+            {/* <Image src={peroroIcon.src} alt={peroroIcon.alt} priority /> */}
           </Icon>
         </div>
         <div>
