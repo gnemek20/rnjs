@@ -16,6 +16,9 @@
 .container > div {
   display: flex;
 }
+.container > div:nth-child(1) {
+  margin-right: auto;
+}
 .container > div:nth-child(2) {
   margin-left: auto;
 }
