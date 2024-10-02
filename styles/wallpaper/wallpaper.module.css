@@ -1,0 +1,6 @@
+.wallpaper {
+  background: url('../../public//images//wallpaper.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
