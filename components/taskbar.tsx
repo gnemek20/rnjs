@@ -7,9 +7,12 @@ const peroroIcon = {
   alt: 'peroroIcon'
 }
 
-const Icon = ({ className, children }: { className?: string, children: ReactNode }) => {
+const Icon = (
+  { className, onClick, children }:
+  { className?: string, onClick?: Function, children: ReactNode }
+) => {
   return (
-    <div className={`${styles.icon} ${className?? className}`}>
+    <div className={`${styles.icon} ${className?? className}`} onClick={() => onClick && onClick()}>
       { children }
     </div>
   );
@@ -39,6 +42,10 @@ const taskbar = () => {
     ].join('\n'));
   }
 
+  const reload = () => {
+    window.location.reload();
+  }
+
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
@@ -55,7 +62,7 @@ const taskbar = () => {
     <div className={`${styles.taskbar}`}>
       <div className={`${styles.container}`}>
         <div>
-          <Icon>
+          <Icon onClick={reload}>
             <Image src={peroroIcon.src} alt={peroroIcon.alt} priority />
           </Icon>
         </div>
