@@ -1,9 +1,10 @@
-import { Wallpaper } from '@/components/index';
+import { Taskbar, Wallpaper } from '@/components/index';
 
 const Landing = () => {
   return (
     <>
       <Wallpaper />
+      <Taskbar />
     </>
   );
 }
