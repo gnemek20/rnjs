@@ -35,6 +35,7 @@
   transition: all 200ms;
 }
 .icon > img {
+  width: 26px;
   width: auto;
   height: 100%;
   border-radius: 5px;
