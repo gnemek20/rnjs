@@ -18,7 +18,7 @@ const Icon = (
   );
 }
 
-const taskbar = () => {
+const Taskbar = () => {
   const [date, setDate] = useState<string>('');
 
   const getDate = () => {
@@ -76,4 +76,4 @@ const taskbar = () => {
   );
 }
 
-export default taskbar;
+export default Taskbar;
