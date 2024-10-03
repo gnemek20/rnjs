@@ -4,22 +4,18 @@ import { useEffect, useRef, useState } from 'react';
 const Display = () => {
   const wallpaperRef = useRef<HTMLDivElement>(null);
 
-  const [innerWidth, setInnerWidth] = useState<number>(0);
   const [innerHeight, setInnerHeight] = useState<number>(0);
 
-  const setInnerSize = async () => {
-    const width = window.innerWidth;
+  const setInnerSize = async () => {    
     const height = window.innerHeight;
-
-    setInnerWidth(width);
+    
     setInnerHeight(height);
   }
-
+  
   const setWallpaperSize = () => {
     const target = wallpaperRef.current;
-
+    
     const size = [
-      `width: ${innerWidth}px`,
       `height: ${innerHeight}px`
     ].join('; ');
 
@@ -50,11 +46,10 @@ const Display = () => {
 
   useEffect(() => {
     setWallpaperSize();
-  }, [innerWidth, innerHeight]);
+  }, [innerHeight]);
 
   return (
-    <div ref={wallpaperRef} className={`${styles.wallpaper}`}>
-    </div>
+    <div ref={wallpaperRef} className={`${styles.wallpaper}`} />
   );
 }
 
