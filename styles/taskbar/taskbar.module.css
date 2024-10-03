@@ -43,12 +43,12 @@
 .clock {
   display: flex;
   align-items: center;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.8);
   text-align: center;
 }
 
 @media (hover: hover) {
   .icon:hover {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.15);
   }
 }
