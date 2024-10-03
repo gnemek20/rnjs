@@ -3,4 +3,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  touch-action: none;
+  pointer-events: none;
 }
