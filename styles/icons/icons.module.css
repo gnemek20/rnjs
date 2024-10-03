@@ -11,13 +11,52 @@
 }
 
 .icons {
+  width: 100%;
   height: 100%;
   display: grid;
-  grid-auto-columns: 50px;
-  grid-template-rows: repeat(auto-fill, 50px);
   grid-auto-flow: column;
-  gap: 10px;
+  grid-auto-columns: 65px;
+  grid-template-rows: repeat(auto-fill, 85px);
+  gap: 15px;
 }
-.icons > div {
-  background-color: aqua;
+
+.icon {
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border-radius: 2.5px;
+  transition: all 200ms;
+}
+.icon > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.icon > p {
+  font-size: 14px;
+  color: white;
+}
+
+@media (hover: hover) {
+  .icon:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .icons {
+    justify-content: center;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fill, 55px);
+    grid-template-rows: none;
+    grid-auto-rows: 65px;
+  }
 }
