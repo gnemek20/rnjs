@@ -52,6 +52,10 @@
     flex-direction: column;
   }
 
+  .wrapper {
+    padding-top: 30px;
+  }
+
   .icons {
     justify-content: center;
     grid-auto-flow: row;
