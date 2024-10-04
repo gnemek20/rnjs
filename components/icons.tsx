@@ -7,24 +7,38 @@ const profileIcon = {
   alt: '프로필'
 }
 
+const portfolioIcon = {
+  src: require('@/public/icons/portfolio.png'),
+  alt: '포트폴리오'
+}
+
 const Icon = (
   { icon, name }:
   { icon: StaticImport, name: string }
 ) => {
   return (
     <div className={`${styles.icon}`}>
-      <Image src={icon} alt={name} />
+      <Image src={icon} alt={name} priority />
       <p>{ name }</p>
     </div>
   );
 }
 
 const Icons = () => {
+  const iconList: Array<typeof profileIcon> = new Array(
+    profileIcon,
+    portfolioIcon
+  );
+
   return (
     <div className={`${styles.container}`}>
       <div className={`${styles.wrapper}`}>
         <div className={`${styles.icons}`}>
-          <Icon icon={profileIcon.src} name={profileIcon.alt} />
+          {
+            iconList.map((icon, index) => (
+              <Icon icon={icon.src} name={icon.alt} key={index} />
+            ))
+          }
         </div>
       </div>
     </div>
