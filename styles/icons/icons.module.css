@@ -1,13 +1,11 @@
 .container {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
 }
 .wrapper {
-  padding: 10px 10px 60px;
+  padding: 10px;
 }
 
 .icons {
@@ -15,7 +13,7 @@
   height: 100%;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 65px;
+  grid-template-columns: repeat(auto-fill, 65px);
   grid-template-rows: repeat(auto-fill, 85px);
   gap: 15px;
 }
@@ -60,7 +58,6 @@
     justify-content: center;
     grid-auto-flow: row;
     grid-template-columns: repeat(auto-fill, 55px);
-    grid-template-rows: none;
-    grid-auto-rows: 65px;
+    grid-template-rows: repeat(auto-fill, 65px);
   }
 }
