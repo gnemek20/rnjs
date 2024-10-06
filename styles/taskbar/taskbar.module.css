@@ -1,5 +1,6 @@
 .taskbar {
   position: relative;
+  z-index: 10;
   margin-top: auto;
   width: 100%;
   height: 50px;

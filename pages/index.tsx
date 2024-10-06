@@ -1,9 +1,10 @@
-import { Desktop } from '@/components/index';
+import { Desktop, Web } from '@/components/index';
 
 const Landing = () => {
   return (
     <>
       <Desktop />
+      <Web />
     </>
   );
 }
