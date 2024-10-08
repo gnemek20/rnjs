@@ -87,7 +87,11 @@ const Web = () => {
   }
 
   const WebTaskbar = () => {
+    const webTaskbarRef = useRef<null>(null);
+
     const startMoving = (clickEvent: React.MouseEvent) => {
+      if (clickEvent.target !== webTaskbarRef.current) return;
+
       const moveWeb = (moveEvent: MouseEvent) => {
         const deltaX = moveEvent.screenX - clickEvent.screenX;
         const deltaY = moveEvent.screenY - clickEvent.screenY;
@@ -108,7 +112,7 @@ const Web = () => {
     }
 
     return (
-      <div className={`${webTaskbarStyles.webTaskbar}`} onMouseDown={(event: React.MouseEvent) => startMoving(event)}>
+      <div ref={webTaskbarRef} className={`${webTaskbarStyles.webTaskbar}`} onMouseDown={(event: React.MouseEvent) => startMoving(event)}>
         <div className={`${webTaskbarStyles.close}`}>
           <Image src={xIcon.src} alt={xIcon.alt} />
         </div>
