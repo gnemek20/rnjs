@@ -12,6 +12,8 @@ const xIcon = {
 const Web = () => {
   const webRef = useRef<HTMLDivElement>(null);
 
+  const [renderingWeb, setRenderingWeb] = useState<boolean>(true);
+
   const [webTop, setWebTop] = useState<number>();
   const [webLeft, setWebLeft] = useState<number>();
 
@@ -111,9 +113,13 @@ const Web = () => {
       document.addEventListener('mouseup', finishMoving, { once: true });
     }
 
+    const closeWeb = () => {
+      setRenderingWeb(false);
+    }
+
     return (
       <div ref={webTaskbarRef} className={`${webTaskbarStyles.webTaskbar}`} onMouseDown={(event: React.MouseEvent) => startMoving(event)}>
-        <div className={`${webTaskbarStyles.close}`}>
+        <div className={`${webTaskbarStyles.close}`} onClick={() => closeWeb()}>
           <Image src={xIcon.src} alt={xIcon.alt} />
         </div>
       </div>
@@ -149,7 +155,7 @@ const Web = () => {
     setWebHeight(targetHeight);
   }, []);
 
-  return (
+  return renderingWeb && (
     <div ref={webRef} className={`${styles.web}`}>
       <Outline />
       <div className={`${styles.container}`}>
