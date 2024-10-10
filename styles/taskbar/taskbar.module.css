@@ -20,7 +20,7 @@
 .container > div:nth-child(1) {
   margin-right: auto;
 }
-.container > div:nth-child(2) {
+.container > div:last-child {
   margin-left: auto;
 }
 
@@ -41,9 +41,23 @@
   border-radius: 5px;
 }
 
+.taskContainer {
+  display: flex;
+  width: 100%;
+}
+.taskList {
+  display: flex;
+  padding: 0px 20px;
+  gap: 0px;
+}
+.selectedTask {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
 .clock {
   display: flex;
   align-items: center;
+  width: 80px;
   color: rgba(255, 255, 255, 0.8);
   text-align: center;
   font-size: 14px;

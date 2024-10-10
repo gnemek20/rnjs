@@ -1,8 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Icons, Taskbar, Wallpaper } from '.';
 import styles from '@/styles/desktop/desktop.module.css';
+import { webAttribute, webNames } from '@/types/webTypes';
 
-const Desktop = () => {
+const Desktop = (
+  { webList, renderedWebList, selectedWeb }:
+  { webList: Array<webAttribute>, renderedWebList: Array<webNames>, selectedWeb: webNames }
+) => {
   const desktopRef = useRef<HTMLDivElement>(null);
 
   const [innerHeight, setInnerHeight] = useState<number>(0);
@@ -52,8 +56,8 @@ const Desktop = () => {
   return (
     <div ref={desktopRef} className={`${styles.desktop}`}>
       <Wallpaper />
-      <Icons />
-      <Taskbar />
+      <Icons webList={webList} />
+      <Taskbar webList={webList} renderedWebList={renderedWebList} selectedWeb={selectedWeb} />
     </div>
   );
 }

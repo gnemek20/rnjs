@@ -1,4 +1,5 @@
 import styles from '@/styles/taskbar/taskbar.module.css';
+import { webAttribute, webNames } from '@/types/webTypes';
 import Image from 'next/image';
 import { ReactNode, useEffect, useState } from 'react';
 
@@ -18,7 +19,19 @@ const Icon = (
   );
 }
 
-const Taskbar = () => {
+const Taskbar = (
+  { webList, renderedWebList, selectedWeb }:
+  { webList: Array<webAttribute>, renderedWebList: Array<webNames>, selectedWeb: webNames }
+) => {
+  interface taskAttribute {
+    name: webAttribute['name'],
+    icon: webAttribute['icon'],
+    openWeb: webAttribute['openWeb']
+  }
+
+  const [taskList, setTaskList] = useState<Array<taskAttribute>>([]);
+  const [taskNameList, setTaskNameList] = useState<Array<webNames>>([]);
+
   const [date, setDate] = useState<string>('');
 
   const getDate = () => {
@@ -47,6 +60,45 @@ const Taskbar = () => {
   }
 
   useEffect(() => {
+    if (renderedWebList.length === 0) {
+      setTaskList([]);
+      return;
+    }
+
+    let list = new Array<taskAttribute>();
+
+    webList.map((web) => {
+      const webName = web.name;
+
+      if (renderedWebList.includes(webName)) {
+        list = [...list, {
+          name: webName,
+          icon: web.icon,
+          openWeb: () => web.openWeb()
+        }];
+      }
+    });
+
+    setTaskList(list);
+  }, [renderedWebList]);
+
+  useEffect(() => {
+    if (taskList.length === 0) {
+      setTaskNameList([]);
+      return;
+    }
+
+    let list = new Array<webNames>();
+
+    taskList.forEach((task) => {
+      const taskName = task.name;
+      list = [...list, taskName];
+    });
+
+    setTaskNameList(list);
+  }, [taskList]);
+
+  useEffect(() => {
     let interval: NodeJS.Timeout;
 
     interval = setInterval(() => {
@@ -65,6 +117,17 @@ const Taskbar = () => {
           <Icon onClick={reload}>
             <Image src={peroroIcon.src} alt={peroroIcon.alt} priority />
           </Icon>
+        </div>
+        <div className={`${styles.taskContainer}`}>
+          <div className={styles.taskList}>
+            {
+              taskList.map((task, index) => (
+                <Icon className={`${selectedWeb === task.name ? styles.selectedTask : ''}`} onClick={() => task.openWeb()} key={index}>
+                  <Image src={task.icon.src} alt={task.icon.alt} />
+                </Icon>
+              ))
+            }
+          </div>
         </div>
         <div>
           <Icon className={`${styles.clock}`}>

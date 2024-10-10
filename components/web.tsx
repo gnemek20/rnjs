@@ -3,16 +3,17 @@ import outlineStyles from '@/styles/web/outline.module.css';
 import webTaskbarStyles from '@/styles/web/webTaskbar.module.css';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { webProps } from '@/types/webTypes';
 
 const xIcon = {
   src: require('@/public/icons/x.png'),
   alt: 'x'
 }
 
-const Web = () => {
+const Web = (props: webProps) => {
   const webRef = useRef<HTMLDivElement>(null);
 
-  const [renderingWeb, setRenderingWeb] = useState<boolean>(true);
+  const [renderingWeb, setRenderingWeb] = useState<boolean>(false);
 
   const [webTop, setWebTop] = useState<number>();
   const [webLeft, setWebLeft] = useState<number>();
@@ -93,7 +94,7 @@ const Web = () => {
 
     const startMoving = (clickEvent: React.MouseEvent) => {
       if (clickEvent.target !== webTaskbarRef.current) return;
-
+      
       const moveWeb = (moveEvent: MouseEvent) => {
         const deltaX = moveEvent.screenX - clickEvent.screenX;
         const deltaY = moveEvent.screenY - clickEvent.screenY;
@@ -115,16 +116,41 @@ const Web = () => {
 
     const closeWeb = () => {
       setRenderingWeb(false);
+      props.closeWeb();
     }
 
     return (
       <div ref={webTaskbarRef} className={`${webTaskbarStyles.webTaskbar}`} onMouseDown={(event: React.MouseEvent) => startMoving(event)}>
-        <div className={`${webTaskbarStyles.close}`} onClick={() => closeWeb()}>
+        <div className={`${webTaskbarStyles.close}`} onMouseUp={() => closeWeb()}>
           <Image src={xIcon.src} alt={xIcon.alt} />
         </div>
       </div>
     );
   }
+
+  useEffect(() => {
+    if (typeof props.rendering === 'boolean') {
+      setRenderingWeb(props.rendering);
+    }
+  }, [props.rendering]);
+
+  useEffect(() => {
+    if (renderingWeb) {
+      const target = webRef.current;
+  
+      const targetTop = target?.offsetTop;
+      const targetLeft = target?.offsetLeft;
+  
+      const targetWidth = target?.clientWidth;
+      const targetHeight = target?.clientHeight;
+  
+      setWebTop(targetTop);
+      setWebLeft(targetLeft);
+  
+      setWebWidth(targetWidth);
+      setWebHeight(targetHeight);
+    }
+  }, [renderingWeb]);
 
   useEffect(() => {
     const target = webRef.current;
@@ -139,27 +165,14 @@ const Web = () => {
     target?.setAttribute('style', webStyle);
   }, [webTop, webLeft, webWidth, webHeight]);
 
-  useEffect(() => {
-    const target = webRef.current;
-
-    const targetTop = target?.offsetTop;
-    const targetLeft = target?.offsetLeft;
-
-    const targetWidth = target?.clientWidth;
-    const targetHeight = target?.clientHeight;
-
-    setWebTop(targetTop);
-    setWebLeft(targetLeft);
-
-    setWebWidth(targetWidth);
-    setWebHeight(targetHeight);
-  }, []);
-
   return renderingWeb && (
-    <div ref={webRef} className={`${styles.web}`}>
+    <div ref={webRef} className={`${styles.web}`} onMouseDown={() => props.selectWeb()}>
       <Outline />
-      <div className={`${styles.container}`}>
+      <div className={`${styles.container} ${props.selected ? styles.selected : ''}`}>
         <WebTaskbar />
+        <div className={`${styles.body}`}>
+          { props.children }
+        </div>
       </div>
     </div>
   );
