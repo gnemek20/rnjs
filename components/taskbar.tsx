@@ -65,21 +65,18 @@ const Taskbar = (
       return;
     }
 
-    let list = new Array<taskAttribute>();
+    let list = new Array<taskAttribute>(...taskList);
 
-    
-    renderedWebList.forEach((renderedWeb) => {
-      webList.map((web) => {
-        const webName = web.name;
-  
-        if (renderedWeb === webName) {
-          list = [...list, {
-            name: webName,
-            icon: web.icon,
-            openWeb: () => web.openWeb()
-          }];
-        }
-      });
+    webList.map((web) => {
+      const webName = web.name;
+
+      if (!taskNameList.includes(webName) && renderedWebList.includes(webName)) {
+        list = [...list, {
+          name: webName,
+          icon: web.icon,
+          openWeb: () => web.openWeb()
+        }];
+      }
     });
 
     setTaskList(list);
