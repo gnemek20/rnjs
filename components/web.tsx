@@ -166,9 +166,9 @@ const Web = (props: webProps) => {
   }, [webTop, webLeft, webWidth, webHeight]);
 
   return renderingWeb && (
-    <div ref={webRef} className={`${styles.web}`} onMouseDown={() => props.selectWeb()}>
+    <div ref={webRef} className={`${styles.web} ${props.selected ? styles.selectedWeb : ''}`} onMouseDown={() => props.selectWeb()}>
       <Outline />
-      <div className={`${styles.container} ${props.selected ? styles.selected : ''}`}>
+      <div className={`${styles.container} ${props.selected ? styles.selectedContainer : ''}`}>
         <WebTaskbar />
         <div className={`${styles.body}`}>
           { props.children }
