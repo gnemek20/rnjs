@@ -77,6 +77,9 @@ const Taskbar = (
           openWeb: () => web.openWeb()
         }];
       }
+      else if (taskNameList.includes(webName) && !renderedWebList.includes(webName)) {
+        list = list.filter((item) => { return item.name !== webName });
+      }
     });
 
     setTaskList(list);
