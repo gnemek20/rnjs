@@ -3,7 +3,7 @@ import outlineStyles from '@/styles/web/outline.module.css';
 import webTaskbarStyles from '@/styles/web/webTaskbar.module.css';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { webProps } from '@/types/webTypes';
+import { webNames, webProps } from '@/types/webTypes';
 
 const xIcon = {
   src: require('@/public/icons/x.png'),
@@ -89,7 +89,7 @@ const Web = (props: webProps) => {
     );
   }
 
-  const WebTaskbar = () => {
+  const WebTaskbar = ({ name }: { name: webNames }) => {
     const webTaskbarRef = useRef<null>(null);
 
     const startMoving = (clickEvent: React.MouseEvent) => {
@@ -121,6 +121,9 @@ const Web = (props: webProps) => {
 
     return (
       <div ref={webTaskbarRef} className={`${webTaskbarStyles.webTaskbar}`} onMouseDown={(event: React.MouseEvent) => startMoving(event)}>
+        <div className={`${webTaskbarStyles.name}`}>
+          { name }
+        </div>
         <div className={`${webTaskbarStyles.close}`} onMouseUp={() => closeWeb()}>
           <Image src={xIcon.src} alt={xIcon.alt} />
         </div>
@@ -169,7 +172,7 @@ const Web = (props: webProps) => {
     <div ref={webRef} className={`${styles.web} ${props.selected ? styles.selectedWeb : ''}`} onMouseDown={() => props.selectWeb()}>
       <Outline />
       <div className={`${styles.container} ${props.selected ? styles.selectedContainer : ''}`}>
-        <WebTaskbar />
+        <WebTaskbar name={props.name} />
         <div className={`${styles.body}`}>
           { props.children }
         </div>

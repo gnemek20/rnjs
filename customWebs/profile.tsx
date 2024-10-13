@@ -3,7 +3,7 @@ import { customWebProps } from "@/types/webTypes";
 
 const Profile = (props: customWebProps) => {
   return props.rendering && (
-    <Web rendering={props.rendering} selected={props.selected} selectWeb={() => props.selectWeb()} closeWeb={() => props.closeWeb()}>
+    <Web name={props.name} rendering={props.rendering} selected={props.selected} selectWeb={() => props.selectWeb()} closeWeb={() => props.closeWeb()}>
       <p>profile</p>
     </Web>
   );

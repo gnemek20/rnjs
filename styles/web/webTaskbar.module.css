@@ -19,6 +19,10 @@
   transition: all 100ms;
 }
 
+.name {
+  user-select: none;
+  pointer-events: none;
+}
 .close {
   margin-left: auto;
 }

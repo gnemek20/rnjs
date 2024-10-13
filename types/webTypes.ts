@@ -4,6 +4,7 @@ import { imageType } from "./publicTypes";
 export type webNames = 'profile' | 'portfolio' | undefined;
 
 export interface webProps {
+  name: webNames,
   rendering: boolean,
   selected: boolean,
   selectWeb: Function,
@@ -12,6 +13,7 @@ export interface webProps {
 }
 
 export interface customWebProps {
+  name: webProps['name'],
   rendering: webProps['rendering'],
   selected: webProps['selected'],
   selectWeb: webProps['selectWeb'],

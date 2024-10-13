@@ -50,7 +50,7 @@ const Landing = () => {
       <Desktop webList={webList} renderedWebList={renderedWebList} selectedWeb={selectedWeb} />
       {
         webList.map((web, index) => (
-          <web.component rendering={renderedWebList.includes(web.name)} selected={selectedWeb === web.name} closeWeb={() => web.closeWeb()} selectWeb={() => setSelectedWeb(web.name)} key={index} />
+          <web.component name={web.name} rendering={renderedWebList.includes(web.name)} selected={selectedWeb === web.name} closeWeb={() => web.closeWeb()} selectWeb={() => setSelectedWeb(web.name)} key={index} />
         ))
       }
     </>
