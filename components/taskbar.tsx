@@ -32,14 +32,11 @@ const Taskbar = (
   const [taskList, setTaskList] = useState<Array<taskAttribute>>([]);
   const [taskNameList, setTaskNameList] = useState<Array<webNames>>([]);
 
+  const [time, setTime] = useState<string>('');
   const [date, setDate] = useState<string>('');
 
-  const getDate = () => {
+  const getTime = () => {
     const date = new Date();
-
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
 
     const hours = date.getHours();
     const minutes = date.getMinutes();
@@ -49,10 +46,21 @@ const Taskbar = (
       return String(num).padStart(2, '0');
     }
 
-    setDate([
-      `${hours}:${zeroFill(minutes)}:${zeroFill(seconds)}`,
-      `${year}-${zeroFill(month)}-${zeroFill(day)}`
-    ].join('\n'));
+    setTime(`${hours}:${zeroFill(minutes)}:${zeroFill(seconds)}`);
+  }
+
+  const getDate = () => {
+    const date = new Date();
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const zeroFill = (num: number) => {
+      return String(num).padStart(2, '0');
+    }
+
+    setDate(`${year}-${zeroFill(month)}-${zeroFill(day)}`);
   }
 
   const reload = () => {
@@ -104,8 +112,9 @@ const Taskbar = (
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
+    getDate();
     interval = setInterval(() => {
-      getDate();
+      getTime();
     }, 200);
 
     return () => {
@@ -134,6 +143,9 @@ const Taskbar = (
         </div>
         <div>
           <Icon className={`${styles.clock}`}>
+            <div>
+              <p>{ time }</p>
+            </div>
             <p>{ date }</p>
           </Icon>
         </div>

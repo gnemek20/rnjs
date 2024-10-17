@@ -55,12 +55,22 @@
 }
 
 .clock {
-  display: flex;
-  align-items: center;
   width: 80px;
-  color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  font-size: 14px;
+  gap: 5px;
+}
+.clock div {
+  margin-left: 32.5%;
+  width: 100%;
+  display: flex;
+}
+.clock p {
+  font-size: 12px;
+  white-space: pre;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 @media (hover: hover) {
