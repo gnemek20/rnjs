@@ -7,7 +7,7 @@ import { imageType } from '@/types/publicTypes';
 import Image from 'next/image';
 
 const profileIcon: imageType = {
-  src: require('@/public/images/peroro.jpg'),
+  src: require('@/public/icons/mika.png'),
   alt: 'profile'
 }
 
