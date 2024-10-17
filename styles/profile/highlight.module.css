@@ -2,13 +2,16 @@
   position: absolute;
   bottom: 0px;
   right: 0px;
+  width: 75%;
+  max-width: 375px;
+  display: flex;
   user-select: none;
   pointer-events: none;
   overflow: hidden;
 }
 .highlight > img {
-  width: auto;
-  height: 100%;
+  width: 100%;
+  height: auto;
   opacity: 0.15;
 }
 

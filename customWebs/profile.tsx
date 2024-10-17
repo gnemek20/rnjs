@@ -69,9 +69,12 @@ const Profile = (props: customWebProps) => {
             <Information category="기본 정보">
               <InformationBox name="이름" value="권민석" />
               <InformationBox name="나이" value="22" />
+              <InformationBox name="성별" value="남자" />
+              <InformationBox name="군 여부" value="미필" />
             </Information>
             <Information category="기타">
               <InformationBox value="소개 영상" />
+              <InformationBox value="자격증" />
             </Information>
           </div>
         </div>
