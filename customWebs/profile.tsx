@@ -1,4 +1,4 @@
-import { Web } from '@/components';
+import { Dialog, Web } from '@/components';
 import { customWebProps } from '@/types/webTypes';
 import styles from '@/styles/profile/profile.module.css';
 import informationStyles from '@/styles/profile/information.module.css';
@@ -18,10 +18,17 @@ const characterIcon: imageType = {
   alt: 'character'
 }
 
+const licenseImage: imageType = {
+  src: require('@/public/images/license.jpg'),
+  alt: 'license'
+}
+
 const Profile = (props: customWebProps) => {
   interface informationAttribute {
     name?: string,
     value: string,
+    openDialog?: Function
+    closeDialog?: Function
   }
 
   const defaultInformation = new Array<informationAttribute>(
@@ -48,7 +55,8 @@ const Profile = (props: customWebProps) => {
       value: '소개 영상'
     },
     {
-      value: '자격증'
+      value: '자격증',
+      openDialog: () => setRenderingLicenseDialog(true)
     }
   );
 
@@ -58,6 +66,8 @@ const Profile = (props: customWebProps) => {
   );
 
   const inko = new Inko();
+
+  const [renderingLicenseDialog, setRenderingLicenseDialog] = useState<boolean>(false);
 
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchWord, setSearchWord] = useState<string>('');
@@ -77,9 +87,9 @@ const Profile = (props: customWebProps) => {
     );
   }
 
-  const InformationBox = ({ name, value }: { name?: string, value: string }) => {
+  const InformationBox = ({ name, value, openDialog }: { name?: informationAttribute['name'], value: informationAttribute['value'], openDialog?: informationAttribute['openDialog'] }) => {
     return (
-      <div className={`${informationStyles.informationBox}`}>
+      <div className={`${informationStyles.informationBox}`} onClick={() => openDialog && openDialog()}>
         { value && <p className={`${informationStyles.value}`}>{ value }</p> }
         { name && <p className={`${informationStyles.name}`}>{ name }</p> }
       </div>
@@ -145,6 +155,14 @@ const Profile = (props: customWebProps) => {
 
   return props.rendering && (
     <Web name={props.name} rendering={props.rendering} selected={props.selected} selectWeb={() => props.selectWeb()} closeWeb={() => props.closeWeb()}>
+      <Dialog rendering={renderingLicenseDialog} closeDialog={() => setRenderingLicenseDialog(false)}>
+        <div className={`${styles.licenseDialog}`}>
+          <div className={`${styles.licenseImage}`}>
+            <Image src={licenseImage.src} alt={licenseImage.alt} />
+          </div>
+          <p>정보 처리 기능사</p>
+        </div>
+      </Dialog>
       <div className={`${styles.background}`}>
         <Highlight image={characterIcon} />
         <div className={`${styles.profile}`}>
@@ -161,14 +179,14 @@ const Profile = (props: customWebProps) => {
                   <Information category="기본 정보">
                     {
                       defaultInformation.map((information, index) => (
-                        <InformationBox name={information.name} value={information.value} key={index} />
+                        <InformationBox name={information.name} value={information.value} openDialog={() => information.openDialog && information.openDialog()} key={index} />
                       ))
                     }
                   </Information>
                   <Information category="기타">
                     {
                       etcInformation.map((information, index) => (
-                        <InformationBox value={information.value} key={index} />
+                        <InformationBox value={information.value} openDialog={() => information.openDialog && information.openDialog()} key={index} />
                       ))
                     }
                   </Information>
@@ -178,8 +196,8 @@ const Profile = (props: customWebProps) => {
                   <Information category="검색 결과">
                     {
                       searchingInformationList?.length !== 0 ? (
-                        searchingInformationList?.map((Information, index) => (
-                          <InformationBox name={Information.name ? Information.name : ''} value={Information.value} key={index} />
+                        searchingInformationList?.map((information, index) => (
+                          <InformationBox name={information.name ? information.name : ''} value={information.value} openDialog={() => information.openDialog && information.openDialog()} key={index} />
                         ))
                       ) : (
                         <div className={`${styles.nothingToSearch}`}>

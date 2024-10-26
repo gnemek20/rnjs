@@ -5,3 +5,5 @@ export { default as Icons } from './icons';
 export { default as Desktop } from './desktop';
 
 export { default as Web } from './web';
+
+export { default as Dialog } from './dialog';
