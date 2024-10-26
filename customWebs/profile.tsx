@@ -157,10 +157,10 @@ const Profile = (props: customWebProps) => {
     <Web name={props.name} rendering={props.rendering} selected={props.selected} selectWeb={() => props.selectWeb()} closeWeb={() => props.closeWeb()}>
       <Dialog rendering={renderingLicenseDialog} closeDialog={() => setRenderingLicenseDialog(false)}>
         <div className={`${styles.licenseDialog}`}>
+          <p>정보 처리 기능사</p>
           <div className={`${styles.licenseImage}`}>
             <Image src={licenseImage.src} alt={licenseImage.alt} />
           </div>
-          <p>정보 처리 기능사</p>
         </div>
       </Dialog>
       <div className={`${styles.background}`}>
