@@ -8,6 +8,8 @@ const dummyImage = {
   alt: 'dummy'
 }
 
+// 작업중인 웹, 대양ING, Hyunwoo.ai, artificialvision, Inpock?
+
 const Portfolio = (props: customWebProps) => {
   return props.rendering && (
     <Web name={props.name} rendering={props.rendering} selected={props.selected} selectWeb={() => props.selectWeb()} closeWeb={() => props.closeWeb()}>

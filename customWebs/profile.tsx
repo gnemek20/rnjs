@@ -153,6 +153,12 @@ const Profile = (props: customWebProps) => {
     setSearchingInformationList(list);
   }, [searchWord]);
 
+  useEffect(() => {
+    if (props.rendering) {
+      setSearchValue('');
+    }
+  }, [props.rendering]);
+
   return props.rendering && (
     <Web name={props.name} rendering={props.rendering} selected={props.selected} selectWeb={() => props.selectWeb()} closeWeb={() => props.closeWeb()}>
       <Dialog rendering={renderingLicenseDialog} closeDialog={() => setRenderingLicenseDialog(false)}>
