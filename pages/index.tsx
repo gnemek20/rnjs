@@ -1,7 +1,7 @@
 import { Desktop } from '@/components';
 import { webAttribute, webNames } from '@/types/webTypes';
 import { Profile, Portfolio } from '@/customWebs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const profileIcon = {
   src: require('@/public/icons/profile.png'),
@@ -37,6 +37,8 @@ const Landing = () => {
   const [renderedWebList, setRenderedWebList] = useState<Array<webNames>>([]);
   const [selectedWeb, setSelectedWeb] = useState<webNames>();
 
+  const [webCloseComposeKey, setWebCloseComposeKey] = useState<boolean>();
+
   const openWeb = (webName: webNames) => {
     setSelectedWeb(webName);
     if (!renderedWebList.includes(webName)) setRenderedWebList([...renderedWebList, webName]);
@@ -44,6 +46,43 @@ const Landing = () => {
   const closeWeb = (webName: webNames) => {
     setRenderedWebList(renderedWebList?.filter((web) => web !== webName));
   }
+
+  const keyDown = (keyDownEvent: KeyboardEvent) => {
+    const downedKey = keyDownEvent.key;
+
+    const composeKey = (keyUpEvent: KeyboardEvent) => {
+      const upedKey = keyUpEvent.key;
+      
+      if (upedKey === 'w') {
+        setWebCloseComposeKey(true);
+      }
+      else if (upedKey === 'Alt') {
+        document.removeEventListener('keyup', composeKey);
+        document.addEventListener('keydown', keyDown);
+      }
+    }
+    
+    if (downedKey === 'Alt') {
+      document.removeEventListener('keydown', keyDown);
+      document.addEventListener('keyup', composeKey);
+    }
+  }
+
+  useEffect(() => {
+    if (webCloseComposeKey) {
+      if (!renderedWebList.includes(selectedWeb)) {
+        setWebCloseComposeKey(false);
+        return;
+      }
+
+      closeWeb(selectedWeb);
+      setWebCloseComposeKey(false);
+    }
+  }, [webCloseComposeKey]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', keyDown);
+  }, []);
 
   return (
     <>
