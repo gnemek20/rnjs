@@ -152,7 +152,7 @@ const Profile = (props: customWebProps) => {
             <Image src={profileIcon.src} alt={profileIcon.alt} />
           </div>
           <div className={`${styles.search}`}>
-            <input type="text" placeholder="검색어 (Ex. 이름, 자격증 . . .)" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearchValue(event.target.value)} spellCheck={false} />
+            <input type="text" placeholder="검색어 (Ex. 이름, skdl . . .)" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setSearchValue(event.target.value)} spellCheck={false} />
           </div>
           <div className={`${styles.information}`}>
             {
