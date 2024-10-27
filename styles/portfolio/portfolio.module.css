@@ -4,3 +4,11 @@
   gap: 50px;
   padding: 10px 25px;
 }
+
+@media screen and (max-width: 768px) {
+  .portfolioList {
+    gap: 10px;
+    padding: 0px;
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}

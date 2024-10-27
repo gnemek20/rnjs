@@ -18,10 +18,8 @@
   display: flex;
   align-items: center;
   height: 35px;
-  gap: 10px;
-}
-.point > p {
   font-size: 18px;
+  gap: 10px;
 }
 .icon {
   height: 100%;
@@ -46,7 +44,6 @@
   overflow: hidden;
 }
 .content > p {
-  overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
   display: -webkit-box;
@@ -57,5 +54,22 @@
 @media (hover: hover) {
   .point:hover + .hyperLink > a {
     text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .item {
+    min-width: auto;
+    max-width: none;
+    padding: 15px;
+    background-color: white;
+  }
+
+  .point {
+    height: 30px;
+    font-size: 16px;
+  }
+  .hyperLink {
+    font-size: 20px;
   }
 }
