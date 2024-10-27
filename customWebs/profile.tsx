@@ -155,6 +155,7 @@ const Profile = (props: customWebProps) => {
 
   useEffect(() => {
     if (props.rendering) {
+      setRenderingLicenseDialog(false);
       setSearchValue('');
     }
   }, [props.rendering]);

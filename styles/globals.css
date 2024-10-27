@@ -16,8 +16,19 @@ p {
   font-family: 'font';
 }
 
+a {
+  font-family: 'font';
+  text-decoration: none;
+}
+
 @font-face {
   font-family: 'font';
   src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot);
   src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.ttf) format("truetype");
+}
+
+@media (hover: hover) {
+  a:hover {
+    text-decoration: underline;
+  }
 }
