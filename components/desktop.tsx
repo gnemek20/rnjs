@@ -42,10 +42,10 @@ const Desktop = (
 
   useEffect(() => {
     setInnerSize();
-    window.addEventListener('resize', onResizing());
+    document.addEventListener('resize', onResizing());
 
     return () => {
-      window.removeEventListener('resize', onResizing());
+      document.removeEventListener('resize', onResizing());
     }
   }, []);
 
