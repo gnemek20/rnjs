@@ -13,6 +13,16 @@ const sampleImage: imageType = {
   alt: 'sample'
 }
 
+const artificialVisionImage: imageType = {
+  src: require('@/public/images/artificialVision.jpg'),
+  alt: 'artificialVision'
+}
+
+const deayangINGImage: imageType = {
+  src: require('@/public/images/daeyangING.jpg'),
+  alt: 'daeyangING'
+}
+
 interface itemAttribute {
   icon?: imageType,
   link: string,
@@ -65,6 +75,7 @@ const Portfolio = (props: customWebProps) => {
       ].join(' ')
     },
     {
+      icon: deayangINGImage,
       link: 'https://daeyanging.com',
       title: '대양ING',
       content: [
@@ -82,6 +93,7 @@ const Portfolio = (props: customWebProps) => {
       ].join(' ')
     },
     {
+      icon: artificialVisionImage,
       link: 'https://artificialvision-python.com',
       title: 'Aritificial Vision',
       content: [

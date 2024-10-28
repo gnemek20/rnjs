@@ -23,13 +23,18 @@
 }
 .icon {
   height: 100%;
+  aspect-ratio: 1 / 1;
   display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
 .icon > img {
   width: auto;
   height: 100%;
+  object-fit: cover;
 }
 
 .hyperLink {
