@@ -52,7 +52,7 @@ const Profile = (props: customWebProps) => {
 
   const etcInformation = new Array<informationAttribute>(
     {
-      value: '소개 영상'
+      value: '자기 소개서'
     },
     {
       value: '자격증',

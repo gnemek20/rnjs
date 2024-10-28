@@ -1,0 +1,57 @@
+.background {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0px 20px;
+  overflow: auto;
+}
+
+.titleContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  margin-bottom: 15px;
+  gap: 15px;
+}
+.titleContainer > a {
+  text-underline-offset: 5px;
+}
+.titleContainer > div > p {
+  font-size: 12px;
+}
+
+.bannerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.bannerContainer > img {
+  width: 90%;
+  height: auto;
+  object-fit: cover;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 80px 0px;
+  gap: 80px;
+}
+.contentContainer h2 {
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  margin-bottom: 15px;
+}
+.contentContainer h2 + div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

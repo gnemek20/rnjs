@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { imageType } from "./publicTypes";
 
 export type webNames = 'profile' | 'portfolio' | undefined;
+export type portfolioNames = 'Kwondow' | '대양ING' | 'HyunWoo.AI' | 'Aritificial Vision' | undefined;
 
 export interface webProps {
   name: webNames,

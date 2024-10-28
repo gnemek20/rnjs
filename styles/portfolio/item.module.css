@@ -10,7 +10,7 @@
 .title {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
 }
 
 .point {
@@ -38,10 +38,13 @@
 }
 
 .hyperLink {
+  display: flex;
   font-size: 22px;
 }
-.hyperLink > a {
+.hyperLink > p {
+  cursor: pointer;
   text-underline-offset: 5px;
+  color: #1a0dab;
 }
 
 .content {
@@ -57,7 +60,10 @@
 }
 
 @media (hover: hover) {
-  .point:hover + .hyperLink > a {
+  .hyperLink > p:hover {
+    text-decoration: underline;
+  }
+  .point:hover + .hyperLink > p {
     text-decoration: underline;
   }
 }

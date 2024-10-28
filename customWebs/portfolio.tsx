@@ -1,12 +1,11 @@
 import { Web } from '@/components';
-import { customWebProps } from '@/types/webTypes';
+import { customWebProps, portfolioNames } from '@/types/webTypes';
 import styles from '@/styles/portfolio/portfolio.module.css';
 import itemStyles from '@/styles/portfolio/item.module.css';
 import Image from 'next/image';
 import { imageType } from '@/types/publicTypes';
-import { useRef } from 'react';
-
-// 작업중인 웹, 대양ING, Hyunwoo.ai, artificialvision, Inpock?
+import { useEffect, useRef, useState } from 'react';
+import Introduce from './introduce';
 
 const sampleImage: imageType = {
   src: require('@/public/images/peroro.jpg'),
@@ -26,42 +25,8 @@ const deayangINGImage: imageType = {
 interface itemAttribute {
   icon?: imageType,
   link: string,
-  title: string,
+  title: portfolioNames,
   content: string
-}
-
-const Item = (props: itemAttribute) => {
-  const hyperLinkRef = useRef<HTMLAnchorElement>(null);
-
-  const clickAnchorElement = () => {
-    const target = hyperLinkRef.current;
-    target?.click();
-  }
-
-  return (
-    <div className={`${itemStyles.item}`}>
-      <div className={`${itemStyles.title}`}>
-        <div className={`${itemStyles.point}`} onClick={() => clickAnchorElement()}>
-          <div className={`${itemStyles.icon}`}>
-            {
-              props.icon ? (
-                <Image src={props.icon.src} alt={props.icon.alt} />
-              ) : (
-                <Image src={sampleImage.src} alt={sampleImage.alt} />
-              )
-            }
-          </div>
-          <p>{ props.link }</p>
-        </div>
-        <div className={`${itemStyles.hyperLink}`}>
-          <a ref={hyperLinkRef} href={props.link} target='_blank'>{ props.title }</a>
-        </div>
-      </div>
-      <div className={`${itemStyles.content}`}>
-        <p>{ props.content }</p>
-      </div>
-    </div>
-  );
 }
 
 const Portfolio = (props: customWebProps) => {
@@ -87,7 +52,7 @@ const Portfolio = (props: customWebProps) => {
       link: 'https://hyunwoo.ai',
       title: 'HyunWoo.AI',
       content: [
-        `캔버스 위의 물체를 조작해볼 수 있는 사이트입니다.`,
+        `캔버스 위의 객체를 조작해 볼 수 있는 사이트입니다.`,
         `지인을 도와 제작한 사이트이며,`,
         `3D 오브젝트와 텍스트를 작업했습니다.`
       ].join(' ')
@@ -105,15 +70,62 @@ const Portfolio = (props: customWebProps) => {
     }
   );
 
+  const [selectedPortfolio, setSelectedPortfolio] = useState<portfolioNames>();
+
+  const Item = (props: itemAttribute) => {
+    const ParagraphRef = useRef<HTMLParagraphElement>(null);
+
+    const clickParagraphElement = () => {
+      ParagraphRef.current?.click();
+    }
+  
+    return (
+      <div className={`${itemStyles.item}`}>
+        <div className={`${itemStyles.title}`}>
+          <div className={`${itemStyles.point}`} onClick={() => clickParagraphElement()}>
+            <div className={`${itemStyles.icon}`}>
+              {
+                props.icon ? (
+                  <Image src={props.icon.src} alt={props.icon.alt} />
+                ) : (
+                  <Image src={sampleImage.src} alt={sampleImage.alt} />
+                )
+              }
+            </div>
+            <p>{ props.link }</p>
+          </div>
+          <div className={`${itemStyles.hyperLink}`}>
+            <p ref={ParagraphRef} onClick={() => setSelectedPortfolio(props.title)}>{ props.title }</p>
+          </div>
+        </div>
+        <div className={`${itemStyles.content}`}>
+          <p>{ props.content }</p>
+        </div>
+      </div>
+    );
+  }
+
+  useEffect(() => {
+    if (props.rendering) {
+      setSelectedPortfolio(undefined);
+    }
+  }, [props.rendering]);
+  
   return props.rendering && (
     <Web name={props.name} rendering={props.rendering} selected={props.selected} selectWeb={() => props.selectWeb()} closeWeb={() => props.closeWeb()}>
-      <div className={`${styles.portfolioList}`}>
-        {
-          itemList.map((item, index) => (
-            <Item icon={item.icon} link={item.link} title={item.title} content={item.content} key={index} />
-          ))
-        }
-      </div>
+      {
+        selectedPortfolio ? (
+          <Introduce portfolioName={selectedPortfolio} routerBack={() => setSelectedPortfolio(undefined)} />
+        ) : (
+          <div className={`${styles.portfolioList}`}>
+            {
+              itemList.map((item, index) => (
+                <Item icon={item.icon} link={item.link} title={item.title} content={item.content} key={index} />
+              ))
+            }
+          </div>
+        )
+      }
     </Web>
   );
 }
